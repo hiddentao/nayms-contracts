@@ -1,4 +1,4 @@
-pragma solidity ^0.5.4;
+pragma solidity ^0.5.10;
 
 import "./ERC165Interface.sol";
 
@@ -22,5 +22,5 @@ contract Upgradeable is ERC165Interface {
   // NOTE: we don't need to explicitly specify a payable fallback function
   // since ETH received from a selfdestruct() is always accepted.
   //
-  // (see https://solidity.readthedocs.io/en/v0.5.4/contracts.html#fallback-function)
+  // (see https://solidity.readthedocs.io/en/v0.5.10/contracts.html#fallback-function)
 }

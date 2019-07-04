@@ -49,7 +49,7 @@
     "moment": "^2.18.1",
     "prompt": "^1.0.0",
     "sol-merger": "^0.1.2",
-    "solc": "^0.5.4",
+    "solc": "^0.5.10",
     "solgraph": "^0.3.2",
     "solhint": "^2.0.0",
     "solidity-coverage": "wearekickback/solidity-coverage#leapdao-decoder",

@@ -1,4 +1,4 @@
-pragma solidity ^0.5.4;
+pragma solidity ^0.5.10;
 
 interface StorageInterface {
   function getAddress(address _addr, bytes32 _key) external view returns (address);
