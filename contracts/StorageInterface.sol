@@ -1,6 +1,10 @@
 pragma solidity ^0.5.10;
 
 interface StorageInterface {
+  function assignWriterRole(address _addr) external;
+  function unassignWriterRole(address _addr) external;
+  function hasWriterRole(address _addr) view external returns (bool);
+
   function getAddress(address _addr, bytes32 _key) external view returns (address);
   function setAddress(address _addr, bytes32 _key, address _value) external;
 

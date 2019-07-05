@@ -1,7 +1,18 @@
 pragma solidity ^0.5.10;
 
 interface SystemInterface {
-  function createPolicy(string memory theSymbol, string memory theName, uint32 theNumberOfShares, uint128 initialPricePerShare, uint256 theStartDate, uint256 theExpirationDate, uint32 theYieldBasisPoints) external returns (address);
+  function createPolicy(
+    string memory _symbol,
+    string memory _name,
+    /* Translates to ERC-20 token count? */
+    uint32 _numberOfShares,
+    /* TODO: If we use 0x contracts for trading will this still be relevant? */
+    uint128 _initialPricePerShare,
+    /* TODO: what do these dates determine? */
+    uint256 _startDate,
+    uint256 _endDate,
+    uint32 _yieldBasisPoints
+  ) external returns (address);
 /*
   function naymApplied(address theAddress) public view returns(bool)
   function brokerApplied(address theAddress) public view returns(bool)

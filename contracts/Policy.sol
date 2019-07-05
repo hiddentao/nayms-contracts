@@ -1,12 +1,13 @@
 pragma solidity ^0.5.10;
 
-import "./access/RBACWithAdmin.sol";
+import "./access/RBAC.sol";
 import "./StorageInterface.sol";
 import "./PolicyInterface.sol";
 
-contract Policy is RBACWithAdmin, PolicyInterface {
-  bytes32 public constant ROLE_POLICY_OWNER = keccak256("policy owner");
-
+/**
+ * TODO: Implement ERC-223/ERC-20 for shares so that they can be transferred
+ */
+contract Policy is RBAC, PolicyInterface {
   bool approved;
   string symbol;
   string name;
@@ -15,18 +16,17 @@ contract Policy is RBACWithAdmin, PolicyInterface {
   uint32 public numberOfShares;
   uint256 public startDate;
   uint256 public endDate;
-  bool public payoutoutApprovedByOwner;
-  bool public payoutoutApprovedByCoordinator;
+  bool public payoutApprovedByOwner;
+  bool public payoutApprovedByCoordinator;
 
-  modifier isPolicyOwner () {
-    require(hasAnyRole(msg.sender, [ROLE_POLICY_OWNER, ROLE_ADMIN]));
+  modifier isBroker () {
+    require(hasAnyRole(msg.sender, [ROLE_ADMIN]));
     _;
   }
 
-  constructor (string memory _symbol, string memory _name) RBACWithAdmin() public {
+  constructor (string memory _symbol, string memory _name) RBAC() public {
     symbol = _symbol;
     name = _name;
-    addRole(msg.sender, ROLE_POLICY_OWNER);
   }
 
   function approvePolicy() isPolicyOwner public {

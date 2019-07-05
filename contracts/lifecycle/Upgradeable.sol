@@ -9,7 +9,11 @@ contract Upgradeable is ERC165Interface {
     interfaceId = _interfaceId;
   }
 
-  function upgrade(address payable _newContract) external {
+  /*
+  TODO: get contract owner approval for upgrade to work!
+   */
+
+  function upgrade(address payable _newContract) onlyAdmin external {
     ERC165Interface i = ERC165Interface(_newContract);
     require(i.supportsInterface(interfaceId), 'new contract has different interface');
     selfdestruct(_newContract);
