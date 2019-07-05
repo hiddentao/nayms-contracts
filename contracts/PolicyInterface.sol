@@ -1,6 +1,6 @@
 pragma solidity ^0.5.10;
 
-interface CampaignInterface {
+interface PolicyInterface {
   enum OrderStatus { OPEN,CLOSED,FILLED,PART_FILLED,CANCELLED }
   enum OrderType { BUY,SELL }
 
