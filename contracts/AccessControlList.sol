@@ -1,9 +1,9 @@
 pragma solidity ^0.5.10;
 
 import "./lib/Roles.sol";
-import "./AccessControlInterface.sol";
+import "./access/AccessControlListInterface.sol";
 
-contract AccessControl is AccessControlInterface {
+contract AccessControlList is AccessControlListInterface {
   using Roles for Roles.RoleContext;
 
   mapping (bytes32 => Roles.RoleContext) private assignments;
@@ -74,6 +74,10 @@ contract AccessControl is AccessControlInterface {
     }
 
     return hasAnyRole;
+  }
+
+  function isAdmin(address _addr) view public {
+    return admins[_addr];
   }
 
   function proposeNewAdmin(address _addr) isAdmin public {

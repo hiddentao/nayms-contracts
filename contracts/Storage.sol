@@ -1,13 +1,11 @@
 pragma solidity ^0.5.10;
 
-import "./AccessControlInterface.sol";
+import "./access/AccessControlListInterface.sol";
+import "./access/AccessControl.sol";
 import "./StorageInterface.sol";
 
-contract Storage is StorageInterface {
-  AccessControlInterface rbac;
-
+contract Storage is StorageInterface, AccessControl {
   bytes32 public constant AC_ROLE_WRITER = keccak256("writer");
-  bytes32 public aclContext;
 
   struct Data {
     mapping(bytes32 => address) singleAddress;
@@ -29,10 +27,7 @@ contract Storage is StorageInterface {
     _;
   }
 
-  constructor (AccessControlInterface _acl) {
-    acl = _acl;
-    aclContext = keccak256(address(this))
-  }
+  constructor (AccessControlListInterface _acl) AccessControl(_acl) {}
 
   // Address
 
@@ -129,15 +124,15 @@ contract Storage is StorageInterface {
   }
 
   function assignWriterRole(address _addr) external {
-    acl.assignRole(aclContext, _addr, ROLE_WRITER)
+    acl.assignRole(aclContext, _addr, ROLE_WRITER);
   }
 
   function unassignWriterRole(address _addr) external {
-    acl.unassignRole(aclContext, _addr, ROLE_WRITER)
+    acl.unassignRole(aclContext, _addr, ROLE_WRITER);
   }
 
   function hasWriterRole(address _addr) view public returns (bool) {
-    return acl.hasRole(aclContext, _addr, ROLE_WRITER)
+    return acl.hasRole(aclContext, _addr, ROLE_WRITER);
   }
 
 }

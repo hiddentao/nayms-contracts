@@ -1,19 +1,34 @@
 pragma solidity ^0.5.10;
 
 import "./ERC165Interface.sol";
+import "../access/AccessControlListInterface.sol";
+import "../access/AccessControl.sol";
 
-contract Upgradeable is ERC165Interface {
+/*
+TODO: look into using proxy pattern for upgradeable contracts.
+https://docs.zeppelinos.org/docs/pattern.html
+
+* The proxy wrapper should only store state and provide functions to change the logic contract
+* The logic contract should not store any state, and simply provide all needed functions
+ */
+
+/*
+contract Upgradeable is AccessControl, ERC165Interface {
+  bool canUpgrade;
   bytes4 interfaceId;
 
-  constructor (bytes4 _interfaceId) public {
+  constructor (AccessControlListInterface _acl, bytes4 _interfaceId) AccessControl(_acl) public {
     interfaceId = _interfaceId;
   }
 
-  /*
-  TODO: get contract owner approval for upgrade to work!
-   */
+  function enableUpgrade() public {
+    canUpgrade = true;
+  }
 
-  function upgrade(address payable _newContract) onlyAdmin external {
+  function upgrade(address payable _newContract) isAdmin external {
+    if (!canUpgrade) {
+      revert("upgrade not enabled yet!")
+    }
     ERC165Interface i = ERC165Interface(_newContract);
     require(i.supportsInterface(interfaceId), 'new contract has different interface');
     selfdestruct(_newContract);
@@ -28,3 +43,4 @@ contract Upgradeable is ERC165Interface {
   //
   // (see https://solidity.readthedocs.io/en/v0.5.10/contracts.html#fallback-function)
 }
+*/

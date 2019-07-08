@@ -1,6 +1,6 @@
 pragma solidity ^0.5.10;
 
-import "./access/RBAC.sol";
+import "./access/AccessControlInterface.sol";
 import "./StorageInterface.sol";
 import "./PolicyInterface.sol";
 

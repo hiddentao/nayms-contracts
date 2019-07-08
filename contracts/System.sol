@@ -1,14 +1,15 @@
 pragma solidity ^0.5.10;
 
 import "./lifecycle/Upgradeable.sol";
+import "./access/AccessControlListInterface.sol";
 import "./SystemInterface.sol";
 
 contract System is Upgradeable, SystemInterface {
-  constructor () Upgradeable() {
-    /*
-    TODO: what should this do?
-     */
-  }
+  /*
+  TODO: flesh this out
+   */
+
+  constructor (AccessControlListInterface _acl) Upgradeable(_acl) {}
 
   function createPolicy(
     string memory _symbol,
