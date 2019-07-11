@@ -3,9 +3,9 @@ pragma solidity ^0.5.10;
 import "./base/EternalStorage.sol";
 
 /**
- * @dev Implementation for PolicyProxy
+ * @dev Business-logic for Policy
  */
-contract PolicyProxyImpl is EternalStorage {
+contract PolicyImpl is EternalStorage {
   /**
    * Approve the policy
    */
