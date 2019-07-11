@@ -10,14 +10,14 @@ library Roles {
     mapping (address => bool) bearer;
   }
 
-  struct RoleContext {
+  struct Context {
     mapping (bytes32 => Role) roles;
   }
 
   /**
    * @dev give an address access to this role
    */
-  function add(RoleContext storage _context, bytes32 _role, address _addr)
+  function add(Context storage _context, bytes32 _role, address _addr)
     internal
   {
     _context.roles[_role].bearer[_addr] = true
@@ -26,7 +26,7 @@ library Roles {
   /**
    * @dev remove an address' access to this role
    */
-  function remove(RoleContext storage _role, bytes32 _role, address _addr)
+  function remove(Context storage _role, bytes32 _role, address _addr)
     internal
   {
     _context.roles[_role].bearer[_addr] = false
@@ -36,7 +36,7 @@ library Roles {
    * @dev check if an address has this role
    * @return bool
    */
-  function has(RoleContext storage _role, bytes32 _role, address _addr)
+  function has(Context storage _role, bytes32 _role, address _addr)
     view
     internal
     returns (bool)

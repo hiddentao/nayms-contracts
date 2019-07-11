@@ -4,10 +4,10 @@ import "./lib/Roles.sol";
 import "./access/AccessControlListInterface.sol";
 
 contract AccessControlList is AccessControlListInterface {
-  using Roles for Roles.RoleContext;
+  using Roles for Roles.Context;
 
-  mapping (bytes32 => Roles.RoleContext) private assignments;
-  mapping (bytes32 => Roles.RoleContext) private managers;
+  mapping (bytes32 => Roles.Context) private assignments;
+  mapping (bytes32 => Roles.Context) private managers;
 
   mapping (address => bool) private admins;
   mapping (address => bool) private pendingAdmins;
