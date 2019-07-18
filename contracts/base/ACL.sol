@@ -1,4 +1,4 @@
-pragma solidity ^0.5.10;
+pragma solidity >=0.5.8;
 
 import "./ACLRoles.sol";
 import "./ACLInterface.sol";
@@ -23,11 +23,11 @@ contract ACL is ACLInterface {
 
   modifier isAssigner (string memory _context, bytes32 _role) {
     // either they have the permission to assign or they're an admin
-    require(canAssignRole(_context, msg.sender, _role) || hasAdminRole(msg.sender));
+    require(hasAssignerRole(_context, msg.sender, _role) || hasAdminRole(msg.sender));
     _;
   }
 
-  constructor () {
+  constructor () public {
     admins[msg.sender] = true;
     numAdmins = 1;
   }
@@ -48,20 +48,16 @@ contract ACL is ACLInterface {
     public
     returns (bool)
   {
-    if (hasRole(_context, _addr, ROLE_ADMIN)) {
-      true
-    }
-
-    bool hasAnyRole = false;
+    bool hasAny = false;
 
     for (uint8 i = 0; i < _roles.length; i++) {
       if (hasRole(_context, _addr, _roles[i])) {
-        hasAnyRole = true;
+        hasAny = true;
         break;
       }
     }
 
-    return hasAnyRole;
+    return hasAny;
   }
 
   /**
@@ -73,14 +69,14 @@ contract ACL is ACLInterface {
 
   function proposeNewAdmin(address _addr) isAdmin public {
     require(!admins[_addr], 'already an admin');
-    requrie(!pendingAdmins[_addr], 'already proposed as an admin')
+    require(!pendingAdmins[_addr], 'already proposed as an admin');
     pendingAdmins[_addr] = true;
   }
 
   function removeAdmin(address _addr) isAdmin public {
-    requrie(_addr != msg.sender, 'cannot remove yourself');
-    requrie(1 < numAdmins, 'cannot remove only admin left');
-    proposedAdmins[_addr] = false;
+    require(_addr != msg.sender, 'cannot remove yourself');
+    require(1 < numAdmins, 'cannot remove only admin left');
+    pendingAdmins[_addr] = false;
     admins[_addr] = false;
     numAdmins--;
   }

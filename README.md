@@ -5,17 +5,17 @@ TODO...
 In separate terminal run local private chain:
 
 ```
-npx ganache-cli
+docker run -it --rm -p 8545:8501 0xorg/devnet
 ```
 
 In current terminal, first run setup script:
 
 ```
-npm run setup
+yarn setup
 ```
 
 Now deploy contracts to local chain:
 
 ```
-npm run deploy:local
+yarn deploy:local
 ```

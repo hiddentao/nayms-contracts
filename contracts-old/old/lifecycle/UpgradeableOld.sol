@@ -1,4 +1,4 @@
-pragma solidity ^0.5.10;
+pragma solidity >=0.5.8;
 
 import "./ERC165Interface.sol";
 import "../access/AccessControlListInterface.sol";

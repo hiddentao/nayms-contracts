@@ -1,4 +1,4 @@
-pragma solidity ^0.5.10;
+pragma solidity >=0.5.8;
 
 interface StorageInterface {
   function assignWriterRole(address _addr) external;

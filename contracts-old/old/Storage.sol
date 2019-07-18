@@ -1,4 +1,4 @@
-pragma solidity ^0.5.10;
+pragma solidity >=0.5.8;
 
 import "./access/AccessControlListInterface.sol";
 import "./access/AccessControl.sol";

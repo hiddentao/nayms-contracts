@@ -1,4 +1,4 @@
-pragma solidity ^0.5.10;
+pragma solidity >=0.5.8;
 
 contract AccessControlListInterface {
   // checking roles in a given context
