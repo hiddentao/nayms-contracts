@@ -7,13 +7,6 @@ import "./base/EternalStorage.sol";
  */
 contract PolicyImpl is EternalStorage {
   /**
-   * Approve the policy
-   */
-  function approve () public {
-    dataBool["approved"] = true;
-  }
-
-  /**
    * Set the name
    */
   function setName (string memory _name) public {
