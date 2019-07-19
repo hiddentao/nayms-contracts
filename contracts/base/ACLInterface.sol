@@ -8,7 +8,7 @@ interface ACLInterface {
   function removeAdmin(address _addr) external;
   function acceptAdminRole() external;
   function assignRole(string calldata _context, address _addr, bytes32 _role) external;
-  function removeRole(string calldata _context, address _addr, bytes32 _role) external;
+  function revokeRole(string calldata _context, address _addr, bytes32 _role) external;
   function addAssigner(string calldata _context, address _addr, bytes32 _role) external;
   function removeAssigner(string calldata _context, address _addr, bytes32 _role) external;
   function hasAssignerRole(string calldata _context, address _addr, bytes32 _role) view external returns (bool);

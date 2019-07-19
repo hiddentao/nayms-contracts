@@ -102,7 +102,7 @@ contract ACL is ACLInterface {
   /**
    * @dev remove a role from an address
    */
-  function removeRole(string memory _context, address _addr, bytes32 _role)
+  function revokeRole(string memory _context, address _addr, bytes32 _role)
     isAssigner(_context, _role)
     public
   {
